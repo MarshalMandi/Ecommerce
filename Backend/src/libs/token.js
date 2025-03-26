@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken"
 
 // jsonweb token will contain the info of userid and user role
-export const generateToken = (userInfo, res) => {
-    const token = jwt.sign(userInfo, process.env.JWT_SECRET, {
+export const generateToken = (clientInfo, res) => {
+    const token = jwt.sign(clientInfo, process.env.JWT_SECRET, {
         expiresIn: "7d",
     });
 
