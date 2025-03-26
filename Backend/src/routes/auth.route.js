@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { signUpUser, login, logout, checkAuthentication } from "../controllers/auth.controller.js"
+import { signUpSeller, signUpUser, login, logout, checkAuthentication } from "../controllers/auth.controller.js"
 import { protectRoute } from "../middlewares/auth.middleware.js"
 
 const router = Router()
@@ -8,7 +8,7 @@ const router = Router()
 router.post("/signupuser", signUpUser)
 
 // seller signup route
-// router.post("/signupseller", signUpSeller)
+router.post("/signupseller", signUpSeller)
 
 // login route
 router.post("/login", login)

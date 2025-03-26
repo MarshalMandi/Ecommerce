@@ -4,6 +4,8 @@ import { connectDB } from "./libs/database.js"
 import cookieParser from "cookie-parser"
 import authRoutes from "./routes/auth.route.js"
 
+import cors from "cors"
+
 dotenv.config()
 
 const app = express()
@@ -14,6 +16,10 @@ app.use(express.urlencoded({ limit: '2mb', extended: true }));
 app.use(cookieParser())
 
 // add the CORS middleware
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+}))
 
 // add the required routes
 app.use("/api/auth", authRoutes)
