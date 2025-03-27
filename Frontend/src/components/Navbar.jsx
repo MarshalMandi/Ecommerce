@@ -43,9 +43,14 @@ const Navbar = () => {
                                     <span className="hidden sm:inline">Login</span>
                                 </Link>
                                 
-                                <Link to={"/signup"} className={`btn btn-sm gap-2`}>
+                                <Link to={"/signupUser"} className={`btn btn-sm gap-2`}>
                                     <User className="size-5" />
                                     <span className="hidden sm:inline">SignUp</span>
+                                </Link>
+
+                                <Link to={"/signupSeller"} className={`btn btn-sm gap-2`}>
+                                    <User className="size-5" />
+                                    <span className="hidden sm:inline">SignUpSeller</span>
                                 </Link>
                             </>
                         )}
