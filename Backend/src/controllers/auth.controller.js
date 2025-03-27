@@ -18,8 +18,9 @@ export const signUpUser = async (req, res) => {
         }
 
         const user = await User.findOne({ email })
+        const seller = await Seller.findOne({ email })
 
-        if (user) {
+        if (user || seller) {
             return res.status(400).json({ message: "Email already exists" })
         }
 
@@ -168,7 +169,7 @@ export const logout = (req, res) => {
 export const checkAuthentication = (req, res) => {
     console.log("the value of req and res inside checkAuth in auth.controller.js is", req, res)
     try {
-        res.status(200).json(req.user)
+        res.status(200).json(req.client)
     } catch (error) {
         console.log("Error in CheckAuth controller", error.message)
     }

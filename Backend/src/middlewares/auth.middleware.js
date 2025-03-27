@@ -1,7 +1,9 @@
 import jwt from 'jsonwebtoken'
 import User from '../models/user.model.js'
+import Seller from '../models/seller.model.js'
 
 export const protectRoute = async (req, res, next) => {
+    let client;
     try {
         const token = req.cookies.EcommerceEntry
 
@@ -16,12 +18,19 @@ export const protectRoute = async (req, res, next) => {
         }
 
         const user = await User.findById(decoded.clientId).select("-password")
+        const seller = await Seller.findById(decoded.clientId).select("-password")
 
-        if (!user) {
-            return res.status(404).json({ message: "User not found" })
+        if (!user && !seller) {
+            return res.status(404).json({ message: "Account not found" })
+        } else if (user) {
+            client = user
+        } else if (seller) {
+            client = seller
+        } else {
+            return res.status(404).json({ message: "Account exists simultaneously as both user and seller" })
         }
 
-        req.user = user
+        req.client = client
 
         next()
 
