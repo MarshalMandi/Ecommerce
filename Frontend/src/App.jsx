@@ -4,7 +4,8 @@ import { Toaster } from "react-hot-toast"
 import { Loader } from "lucide-react"
 import { Routes, Route, Navigate } from "react-router-dom"
 
-import SignUpPage from "./pages/SignUpPage.jsx"
+import UserSignUpPage from "./pages/User.SignUpPage.jsx"
+import SellerSignUpPage from "./pages/Seller.SignUpPage.jsx"
 import LogInPage from "./pages/LogInPage.jsx"
 import UserHomePage from "./pages/User.HomePage.jsx"
 import SellerHomePage from "./pages/Seller.HomePage.jsx"
@@ -45,7 +46,8 @@ let App = () => {
       <Routes>
         <Route path="/" element={!authClient ? <InfoPage /> : <Navigate to={targetpath} />} />
         <Route path="/login" element={!authClient ? <LogInPage /> : <Navigate to={"/"} />} />
-        <Route path="/signup" element={!authClient ? <SignUpPage /> : <Navigate to={"/"} />} />
+        <Route path="/signupUser" element={!authClient ? <UserSignUpPage /> : <Navigate to={"/"} />} />
+        <Route path="/signupSeller" element={!authClient ? <SellerSignUpPage /> : <Navigate to={"/"} />} />
         {/* Homepage for guests */}
         {/* Productpage for guests */}
         <Route path="/user/:userId/home" element={authClient ? <UserHomePage clientInfo={authClient} /> : <Navigate to={"/login"} />} />
