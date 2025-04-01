@@ -9,6 +9,7 @@ import SellerSignUpPage from "./pages/Seller.SignUpPage.jsx"
 import LogInPage from "./pages/LogInPage.jsx"
 import UserHomePage from "./pages/User.HomePage.jsx"
 import SellerHomePage from "./pages/Seller.HomePage.jsx"
+import PostProductPage from "./pages/Seller.PostProductPage.jsx"
 import InfoPage from "./pages/InfoPage.jsx"
 
 import Navbar from "./components/Navbar.jsx"
@@ -52,6 +53,7 @@ let App = () => {
         {/* Productpage for guests */}
         <Route path="/user/:userId/home" element={authClient ? <UserHomePage clientInfo={authClient} /> : <Navigate to={"/login"} />} />
         <Route path="/seller/:sellerId/home" element={authClient ? <SellerHomePage clientInfo={authClient} />: <Navigate to={"/login"} />} />
+        <Route path="/seller/:sellerId/addproduct" element={authClient ? <PostProductPage clientInfo={authClient} />: <Navigate to={"/login"} />} />
       </Routes>
 
       <Toaster />

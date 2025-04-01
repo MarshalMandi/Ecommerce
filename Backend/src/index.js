@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import { connectDB } from "./libs/database.js"
 import cookieParser from "cookie-parser"
 import authRoutes from "./routes/auth.route.js"
+import sellerRoutes from "./routes/seller.route.js"
 
 import cors from "cors"
 
@@ -23,6 +24,8 @@ app.use(cors({
 
 // add the required routes
 app.use("/api/auth", authRoutes)
+
+app.use("/api/seller", sellerRoutes)
 
 // add the port and listen
 const PORT = process.env.PORT
