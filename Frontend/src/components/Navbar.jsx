@@ -2,9 +2,16 @@ import { useAuthStore } from '../store/useAuthStore.js'
 import { Link } from 'react-router-dom'
 import { LogOut, Settings, User } from 'lucide-react'
 import logo from "../assets/StructureAssets/EcommerceLogo.png"
+import { useEffect } from 'react'
 
 const Navbar = () => {
     const { authClient, logout } = useAuthStore()
+    console.log("Auth Client in Navbar:", authClient)
+    let isseller, isuser
+    if (authClient) {
+        isseller = authClient.role === "seller"
+        isuser = authClient.role === "user"
+    }
     return (
         <header className="bg-base-100 fixed w-full top-0">
             <div className="container mx-auto px-4 h-16">
@@ -31,6 +38,18 @@ const Navbar = () => {
                                     <span className="hidden sm:inline">Profile</span>
                                 </Link>
 
+                                {isseller ? (
+                                    <Link to={`/seller/${authClient._id}/addproduct`} className={`btn btn-sm gap-2`}>
+                                        <User className="size-5" />
+                                        <span className="hidden sm:inline">Add Product</span>
+                                    </Link>
+                                ) : null}
+
+                                {/* <Link to={`/seller/${authClient._id}/addproduct`} className={`btn btn-sm gap-2`}>
+                                    <User className="size-5" />
+                                    <span className="hidden sm:inline">Add Product</span>
+                                </Link> */}
+
                                 <button className="flex gap-2 items-center" onClick={logout}>
                                     <LogOut className="size-5" />
                                     <span className="hidden sm:inline">Logout</span>
@@ -42,7 +61,7 @@ const Navbar = () => {
                                     <User className="size-5" />
                                     <span className="hidden sm:inline">Login</span>
                                 </Link>
-                                
+
                                 <Link to={"/signupUser"} className={`btn btn-sm gap-2`}>
                                     <User className="size-5" />
                                     <span className="hidden sm:inline">SignUp</span>
