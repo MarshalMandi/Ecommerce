@@ -4,6 +4,7 @@ import { connectDB } from "./libs/database.js"
 import cookieParser from "cookie-parser"
 import authRoutes from "./routes/auth.route.js"
 import sellerRoutes from "./routes/seller.route.js"
+import productRoutes from "./routes/product.route.js"
 
 import cors from "cors"
 
@@ -26,6 +27,8 @@ app.use(cors({
 app.use("/api/auth", authRoutes)
 
 app.use("/api/seller", sellerRoutes)
+
+app.use("/api/products", productRoutes)
 
 // add the port and listen
 const PORT = process.env.PORT

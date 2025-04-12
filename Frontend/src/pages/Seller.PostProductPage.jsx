@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Camera } from "lucide-react";
+import { Camera, Loader2 } from "lucide-react";
 import { useSellerStore } from "../store/useSellerStore.js";
 
 const PostProductPage = ({ clientInfo }) => {
-    const { addProduct } = useSellerStore()
+    const { addProduct, isAddingProduct } = useSellerStore()
 
     const [productImages, setProductImages] = useState([]);
 
@@ -43,6 +43,17 @@ const PostProductPage = ({ clientInfo }) => {
         return listofcategories;
     }
 
+    const resetinputfields = () => {
+        setProduct({
+            productName: "",
+            productDescription: "",
+            productPrice: "",
+            productStock: "",
+            productCategory: "",
+            productPhotos: null,
+        });
+        setProductImages([]);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -52,7 +63,7 @@ const PostProductPage = ({ clientInfo }) => {
         // Add your API call or logic to save product
         // console.log("the data being sent is", { ...product, productCategory: listcategories, productPhotos: productImages, productSeller: clientInfo._id })
         addProduct({ ...product, productCategory: listcategories, productPhotos: productImages, productSeller: clientInfo._id })
-
+        resetinputfields()        
     };
 
     return (
@@ -142,7 +153,15 @@ const PostProductPage = ({ clientInfo }) => {
 
                         <button type="submit"
                             className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
-                        >Add Product</button>
+                            disabled={isAddingProduct}
+                        >{isAddingProduct ? (
+                            <>
+                                <Loader2 className="h-5 w-5 animate-spin" />
+                                Loading...
+                            </>
+                        ) : (
+                            "Add Product"
+                        )}</button>
                     </form>
                 </div>
             </div>
